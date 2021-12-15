@@ -51,10 +51,11 @@ export default function DetailsPage() {
           <Card.Title>{product.name}</Card.Title>
           <Card.Text>
             Price: {product.prices.currency_symbol} {product.prices.price}
-            <div dangerouslySetInnerHTML={description}></div>
           </Card.Text>
+          <div className="card-text" dangerouslySetInnerHTML={description}></div>
         </Card.Body>
       </Card>
     </>
   );
 }
+
