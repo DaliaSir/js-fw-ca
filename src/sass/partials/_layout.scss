@@ -1,0 +1,16 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0 auto;
+  color: $colour-primary;
+  background-color: $colour-secondary;
+}
+
+.success {
+  padding: 1rem;
+  margin: 10px 0;
+  background: green;
+  color: white;
+}
