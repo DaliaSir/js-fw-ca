@@ -8,6 +8,7 @@ const validationSchema = yup.object().shape({
   lastName: yup.string().required("Last name is required").min(4, "Name must be at least 4 characters"),
   email: yup.string().required("Please enter an email address").email("Please enter a valid email address"),
   message: yup.string().required("Please enter your message").min(10, "The message must be at least 10 characters"),
+  subject: yup.string().required("Please select the subject"),
 });
 
 function ContactForm() {
@@ -37,11 +38,12 @@ function ContactForm() {
         </Form.Group>
         <Form.Group className="mb-3 contact-container__form--form-group" >
           <Form.Label>Subject</Form.Label>
-          <Form.Select aria-label="Default select example">
-            <option>Choose a subject..</option>
+          <Form.Select {...register("subject")}>
+            <option value="">Choose a subject..</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
+            {errors.subject && <span>{errors.subject.message}</span>}
           </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3 contact-container__form--form-group" >
@@ -49,7 +51,7 @@ function ContactForm() {
           <textarea rows={6} {...register("message")} className="form-control" placeholder="Your message" />
           {errors.message && <span>{errors.message.message}</span>}
         </Form.Group>
-        <button type="submit" className="btn btn-primary">Send</button>
+        <button className="btn btn-primary">Send</button>
       </Form>
     </div>
   );
