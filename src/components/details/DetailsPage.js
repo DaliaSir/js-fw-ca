@@ -5,7 +5,6 @@ import Card from "react-bootstrap/Card";
 import axios from "axios";
 import Heading from "../layout/Heading";
 
-
 export default function DetailsPage() {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,6 +36,7 @@ export default function DetailsPage() {
 
   if (error) return <div>{ }</div>;
 
+  const description = { __html: `${product.description}` };
 
   return (
     <>
@@ -50,13 +50,11 @@ export default function DetailsPage() {
         <Card.Body>
           <Card.Title>{product.name}</Card.Title>
           <Card.Text>
-            Price: {product.prices.currency_symbol} {product.prices.price} <br />
-            <span className="product-description">{product.description}</span>
+            <div>Price: {product.prices.currency_symbol} {product.prices.price}</div>
+            <div dangerouslySetInnerHTML={description}></div>
           </Card.Text>
         </Card.Body>
       </Card>
-
-
     </>
   );
 }
