@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
+import { useState } from 'react';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Select from 'react-select';
 import Form from "react-bootstrap/Form";
 
 const validationSchema = yup.object().shape({
@@ -17,6 +19,14 @@ function ContactForm() {
   });
 
   const onSubmit = data => console.log(data);
+
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const options = [
+    { value: 'one', label: 'One' },
+    { value: 'two', label: 'Two' },
+    { value: 'three', label: 'Three' }
+  ]
 
   return (
     <div className="contact-container__form">
@@ -38,13 +48,8 @@ function ContactForm() {
         </Form.Group>
         <Form.Group className="mb-3 contact-container__form--form-group" >
           <Form.Label>Subject</Form.Label>
-          <Form.Select {...register("subject")}>
-            <option value="">Choose a subject..</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-            {errors.subject && <span>{errors.subject.message}</span>}
-          </Form.Select>
+          <Select options={options} defaultValue={selectedOption} onChange={setSelectedOption} {...register("subject")} />
+          {errors.subject && <span>{errors.subject.message}</span>}
         </Form.Group>
         <Form.Group className="mb-3 contact-container__form--form-group" >
           <Form.Label>Message</Form.Label>
